@@ -7,6 +7,7 @@ services:
       POSTGRES_PASSWORD: voting
     volumes:
       - voting_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U voting -d voting"]
       interval: 5s
@@ -22,4 +23,5 @@ services:
         condition: service_healthy
 volumes:
   voting_data:
+
 
