@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560">
+<rect width="1000" height="560" fill="#f5f7fb"/><rect x="40" y="35" width="920" height="490" rx="18" fill="white" stroke="#dbe2ea"/>
+<text x="75" y="88" font-family="Arial" font-size="29" font-weight="bold" fill="#172033">Estadísticas de votación</text>
+<text x="75" y="125" font-family="Arial" font-size="17" fill="#64748b">Ejemplo generado por GET /votes/statistics</text>
+<rect x="75" y="155" width="250" height="105" rx="12" fill="#eef2ff"/><text x="95" y="190" font-family="Arial" font-size="16" fill="#475569">Votos emitidos</text><text x="95" y="235" font-family="Arial" font-size="38" font-weight="bold" fill="#4338ca">10</text>
+<rect x="350" y="155" width="250" height="105" rx="12" fill="#ecfdf5"/><text x="370" y="190" font-family="Arial" font-size="16" fill="#475569">Votantes registrados</text><text x="370" y="235" font-family="Arial" font-size="38" font-weight="bold" fill="#047857">12</text>
+<rect x="625" y="155" width="250" height="105" rx="12" fill="#fff7ed"/><text x="645" y="190" font-family="Arial" font-size="16" fill="#475569">Participación</text><text x="645" y="235" font-family="Arial" font-size="38" font-weight="bold" fill="#c2410c">83.33%</text>
+<text x="75" y="315" font-family="Arial" font-size="20" font-weight="bold" fill="#172033">Resultados por candidato</text>
+<text x="75" y="360" font-family="Arial" font-size="17" fill="#334155">Ana Pérez</text><rect x="250" y="340" width="525" height="28" rx="6" fill="#4f46e5"/><text x="800" y="361" font-family="Arial" font-size="17" fill="#334155">7 · 70%</text>
+<text x="75" y="420" font-family="Arial" font-size="17" fill="#334155">Carlos Ruiz</text><rect x="250" y="400" width="225" height="28" rx="6" fill="#10b981"/><text x="500" y="421" font-family="Arial" font-size="17" fill="#334155">3 · 30%</text>
+<text x="75" y="485" font-family="Arial" font-size="14" fill="#94a3b8">PruebasPsico · API RESTful · FastAPI + PostgreSQL</text>
+</svg>
+
