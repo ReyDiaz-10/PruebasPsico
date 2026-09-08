@@ -135,3 +135,13 @@ def test_vote_listing_and_protected_deletions(client, auth):
         f"/candidates/{candidate['id']}",
         headers=auth,
     ).status_code == 409
+
+def test_root_redirects_to_swagger(client):
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"
+
+def test_root_redirects_to_swagger(client):
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"

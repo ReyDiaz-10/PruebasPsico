@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import RedirectResponse
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -21,6 +22,10 @@ def clean(value: str) -> str:
 
 def same_person_exists(db: Session, name: str, opposite_model) -> bool:
     return db.scalar(select(opposite_model.id).where(func.lower(opposite_model.name) == clean(name).lower())) is not None
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
 
 @app.get("/health", tags=["Sistema"])
 def health(): return {"status": "ok"}
@@ -114,4 +119,5 @@ def statistics(db: Session = Depends(get_db)):
     to_result = lambda c: CandidateStatistic(candidate_id=c.id, candidate_name=c.name, party=c.party, votes=c.votes, percentage=round((c.votes / total_votes * 100) if total_votes else 0, 2))
     results = list(map(to_result, candidates))
     return StatisticsOut(total_votes=total_votes, total_registered_voters=total_voters, total_voters_who_voted=total_votes, participation_percentage=round((total_votes / total_voters * 100) if total_voters else 0, 2), results=results)
+
 
