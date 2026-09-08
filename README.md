@@ -2,7 +2,7 @@
 
 API RESTful desarrollada con Python, FastAPI, SQLAlchemy y PostgreSQL. Impide votos duplicados mediante validación transaccional y una restricción `UNIQUE` en la base de datos. Incluye JWT, paginación, Swagger y pruebas automáticas.
 
-![Estadísticas](docs/statistics.png)
+![Estadísticas](docs/statistics-api.png)
 
 ## Inicio rápido con Docker (recomendado)
 
@@ -79,3 +79,4 @@ Dockerfile        imagen de la API
 docker-compose.yml PostgreSQL + API
 start.*           scripts de inicio multiplataforma
 ```
+
