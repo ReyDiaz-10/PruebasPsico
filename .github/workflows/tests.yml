@@ -32,3 +32,63 @@ jobs:
 
       - name: Ejecutar pruebas
         run: python -m pytest -q
+
+  postgresql:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: voting
+          POSTGRES_USER: voting
+          POSTGRES_PASSWORD: voting
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U voting -d voting"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Crear esquema PostgreSQL
+        env:
+          PGPASSWORD: voting
+        run: |
+          psql -h localhost -U voting -d voting -v ON_ERROR_STOP=1 -f database/init.sql
+
+      - name: Verificar tablas
+        env:
+          PGPASSWORD: voting
+        run: |
+          TABLE_COUNT=$(psql -h localhost -U voting -d voting -tAc "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public' AND table_name IN ('voters','candidates','votes');")
+          echo "Tablas encontradas: $TABLE_COUNT"
+          test "$TABLE_COUNT" = "3"
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Instalar API
+        run: python -m pip install -r requirements.txt
+
+      - name: Comprobar API con PostgreSQL
+        env:
+          DATABASE_URL: postgresql+psycopg://voting:voting@localhost:5432/voting
+          JWT_SECRET: github-actions-test-secret
+        run: |
+          python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > api.log 2>&1 &
+          for intento in {1..20}; do
+            if curl -fsS http://127.0.0.1:8000/health; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat api.log
+          exit 1
