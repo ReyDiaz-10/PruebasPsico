@@ -1,5 +1,7 @@
 # PruebasPsico — Sistema de Votaciones
 
+[![Pruebas automáticas](https://github.com/ReyDiaz-10/PruebasPsico/actions/workflows/tests.yml/badge.svg)](https://github.com/ReyDiaz-10/PruebasPsico/actions/workflows/tests.yml)
+
 API RESTful desarrollada con Python, FastAPI, SQLAlchemy y PostgreSQL. Impide votos duplicados mediante validación transaccional y una restricción `UNIQUE` en la base de datos. Incluye JWT, paginación, Swagger y pruebas automáticas.
 
 ![Estadísticas](docs/statistics-api.png)
@@ -79,4 +81,5 @@ Dockerfile        imagen de la API
 docker-compose.yml PostgreSQL + API
 start.*           scripts de inicio multiplataforma
 ```
+
 
